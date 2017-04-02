@@ -1,0 +1,70 @@
+// using RFID
+void setup() 
+{
+  Serial.begin(9600);   // Initiate a serial communication
+  SPI.begin();      // Initiate  SPI bus
+  mfrc522.PCD_Init();   // Initiate MFRC522
+  Serial.println();
+
+}
+if (content.substring(1) == "BD 31 15 2B") //checks the UID of the card 1
+  {
+    Serial.println("Authorized access Card 1");
+	if(c1==1)//Notify that card 1 has been used and courier submitted
+	C1=1;
+    Serial.println();
+    delay(3000);
+  }
+
+else if (content.substring(1) == "BD 31 15 2B") //checks the UID of the card 2 
+  {
+    Serial.println("Authorized access Card 2");
+	if(c2==1)//Notify that card 1 has been used and courier submitted
+	C2--;
+    Serial.println();
+    delay(3000);
+  }
+ 
+ else   {
+    Serial.println(" Wrong Card");
+ 0   delay(3000);
+  }
+} 
+
+// Displaying to LCD
+
+void setup()
+{
+	lcd.print(String("C1=")+String(c1)+String("C2=")+String(c2));//Displaying in the LcD the courier details
+}	
+
+
+//Servo Motor
+Servo servo_test;    		//initialize a servo object for the connected servo  
+                
+int angle = 0;    
+ 
+void loop() 
+{ 
+	if(C1==1&&Card1==true)//to rotate if card 1 is true i.e card one rfid scaned and C1=1 means card 
+	{
+  for(angle = 0; angle < 180; angle += 1) 	 // command to move from 0 degrees to 180 degrees 
+  {                                  
+    	c1=R;
+	servo_test.write(angle);              	 //command to rotate the servo to the specified angle
+    delay(15);                       
+  } 
+ 
+  delay(1000);
+  
+  for(angle = 180; angle>=1; angle-=5)     // command to move from 180 degrees to 0 degrees 
+  {        
+	c1=0;                        
+    servo_test.write(angle);              //command to rotate the servo to the specified angle
+    delay(15);                       
+  } 
+	}
+}	
+
+    delay(1000);
+}
